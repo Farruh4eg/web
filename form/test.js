@@ -10,7 +10,6 @@ form.addEventListener('submit', e => {
 })
 
 function save(element) {
-    console.log(element);
     for(let i = 0; i < Object.keys(element).length - 1; i++) {
         savedBlog[element[i].name] = element[i].value;
     }
