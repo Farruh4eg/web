@@ -5,7 +5,6 @@ const form = document.forms.blog;
 window.addEventListener('DOMContentLoaded', load);
 
 form.addEventListener('submit', e => {
-    console.log(e);
     e.preventDefault();
     save(e.target);
 })
@@ -24,7 +23,6 @@ function load() {
 }
 
 function show(retrieved) {
-    console.log(retrieved);
     const div = document.createElement('div');
     div.id = 'Blog';
 
