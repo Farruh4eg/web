@@ -1,0 +1,60 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: inherit;
+}
+
+#list {
+    display: flex;
+    flex-direction: column;
+}
+
+form {
+    position: relative;
+    display: flex;
+    column-gap: 5px;
+}
+
+input {
+    width: 300px;
+    padding: 5px;
+}
+
+#submitTask {
+    width: 80px;
+    border: none;
+}
+
+#delete {
+    font-family: Lato;
+    width: 1.8rem;
+    height: 1.8rem;
+    margin-left: 6px;
+    border: none;
+}
+
+#delete:hover {
+    background-color: red;
+    color: white;
+}
+
+#List {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    position: relative;
+    margin-left: 10px;
+    top: 30px;
+}
+
+li {
+    display: flex;
+    font-family: Montserrat;
+    font-size: 1.7rem;
+    align-items: center;
+}
+
+h1 {
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+}
