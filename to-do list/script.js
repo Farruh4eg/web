@@ -9,12 +9,14 @@ form.addEventListener('submit', e => {
     e.currentTarget[0].value = '';
 })
 
+
 function save(element) {
     if (!localStorage.getItem('list')) {
         let savedList = {
             tasks: [],
             taskId: [],
             isInactive: [],
+            count: 0,
         };
         localStorage.setItem('list', JSON.stringify(savedList));
     }
@@ -23,6 +25,7 @@ function save(element) {
     for (let i = 0; i < Object.keys(element).length - 1; i++) {
         savedList['tasks'].push(element[i].value);
         savedList['isInactive'].push(false);
+        savedList['taskId'].push(`taskText${++savedList['count']}`);
     }
     localStorage.setItem('list', JSON.stringify(savedList));
 }
@@ -44,10 +47,7 @@ function show(retrieved) {
                 const showTask = document.createElement('p');
                 showTask.innerText = ++count + '. ' + retrieved.tasks[i];
                 showTask.classList = 'taskText';
-                showTask.id = 'taskText' + Number(+i + 1);
-                if (!savedList.taskId.includes(showTask.id)) {
-                    savedList.taskId.push(showTask.id);
-                }
+                showTask.id = savedList['taskId'][i];
                 console.log(showList);
                 showTask.addEventListener('click', inactiveOnClick);
                 showList.classList = 'myTask' + Number(+i + 1) + ' myTask';
@@ -70,24 +70,24 @@ function show(retrieved) {
 
 function deleteTask(element) {
     const parent = element.target.parentElement;
-    const index = parent.getAttribute('id').match(/(\d)/);
+    const getId = parent.children[0].id;
     const savedList = JSON.parse(localStorage.getItem('list'));
-    savedList.tasks.splice(index[0] - 1, 1);
-    savedList.isInactive.splice(index[0] - 1, 1);
-    savedList.taskId.splice(index[0] - 1, 1);
+    const index = savedList.taskId.indexOf(getId);
+    savedList.tasks.splice(index, 1);
+    savedList.isInactive.splice(index, 1);
+    savedList.taskId.splice(index, 1);
     localStorage.setItem('list', JSON.stringify(savedList));
     parent.style.display = "none";
 }
 
 function inactiveOnClick(element) {
     const child = element.target.parentElement.children[0];
-    const getId = child.getAttribute('id');
+    const index = parseInt(child.innerText);
+    console.log(index);
     const savedList = JSON.parse(localStorage.getItem('list'));
-    console.log(savedList.taskId);
-    const index = savedList.taskId.indexOf(getId);
-    savedList.isInactive[index] = !savedList.isInactive[index];
+    savedList.isInactive[index - 1] = !savedList.isInactive[index - 1];
     localStorage.setItem('list', JSON.stringify(savedList));
-    if (savedList.isInactive[index]) {
+    if (savedList.isInactive[index - 1]) {
         child.style.textDecoration = 'line-through red 3px';
     } else {
         child.style.textDecoration = 'none';
@@ -98,11 +98,11 @@ function inactiveOnLoad() {
     const savedList = JSON.parse(localStorage.getItem('list'));
     const tasksCollection = savedList.taskId;
     for (let i in tasksCollection) {
-        let inactiveTask = document.getElementById([tasksCollection[i]]);
+        let inactiveTask = document.getElementsByClassName('taskText');
         if (savedList.isInactive[i]) {
-            inactiveTask.style.textDecoration = 'line-through red 3px';
+            inactiveTask[i].style.textDecoration = 'line-through red 3px';
         } else {
-            inactiveTask.style.textDecoration = 'none';
+            inactiveTask[i].style.textDecoration = 'none';
         }
     }
 }
