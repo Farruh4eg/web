@@ -53,7 +53,6 @@ function show(retrieved) {
                 showList.classList = 'myTask' + Number(+i + 1) + ' myTask';
                 showList.id = 'myTask' + Number(+i + 1);
                 const deleteBtn = document.createElement('button');
-                deleteBtn.innerText = 'X';
                 deleteBtn.id = 'delete';
                 deleteBtn.addEventListener('click', deleteTask);
                 showList.appendChild(showTask);

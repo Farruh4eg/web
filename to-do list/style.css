@@ -26,16 +26,23 @@ input {
 }
 
 #delete {
-    font-family: Lato;
     width: 1.8rem;
     height: 1.8rem;
     margin-left: 6px;
     border: none;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url('images/trash.svg');
 }
 
 #delete:hover {
     background-color: red;
     color: white;
+    background-image: url('images/trash-white.svg');
 }
 
 #List {
