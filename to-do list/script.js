@@ -1,8 +1,6 @@
-const form = document.forms.inputForm;
-
 window.addEventListener('DOMContentLoaded', load);
 
-form.addEventListener('submit', e => {
+document.forms.inputForm.addEventListener('submit', e => {
     e.preventDefault();
     console.log(e.target);
     save(e.target);
@@ -21,11 +19,20 @@ function save(element) {
         localStorage.setItem('list', JSON.stringify(savedList));
     }
     savedList = JSON.parse(localStorage.getItem('list'));
-    console.log(savedList);
     for (let i = 0; i < Object.keys(element).length - 1; i++) {
+        let listToShow = {
+            tasks: [],
+            taskId: [],
+            isInactive: [],
+            count: 0,
+        }
         savedList['tasks'].push(element[i].value);
+        listToShow['tasks'].push(element[i].value);
         savedList['isInactive'].push(false);
+        listToShow['isInactive'].push(false);
         savedList['taskId'].push(`taskText${++savedList['count']}`);
+        listToShow['taskId'].push(`taskText${++listToShow['count']}`);
+        show(listToShow);
     }
     localStorage.setItem('list', JSON.stringify(savedList));
 }
@@ -37,18 +44,15 @@ function load() {
 }
 
 function show(retrieved) {
-    const ul = document.createElement('ul');
-    ul.id = 'List';
-    let count = 0;
     const savedList = JSON.parse(localStorage.getItem('list'));
+    const ul = document.getElementsByClassName('list')[0];
         try {
             for (let i in retrieved.tasks) {
                 const showList = document.createElement('li');
                 const showTask = document.createElement('p');
-                showTask.innerText = ++count + '. ' + retrieved.tasks[i];
+                showTask.innerText = retrieved.tasks[i];
                 showTask.classList = 'taskText';
                 showTask.id = savedList['taskId'][i];
-                console.log(showList);
                 showTask.addEventListener('click', inactiveOnClick);
                 showList.classList = 'myTask' + Number(+i + 1) + ' myTask';
                 showList.id = 'myTask' + Number(+i + 1);
@@ -57,9 +61,7 @@ function show(retrieved) {
                 deleteBtn.addEventListener('click', deleteTask);
                 showList.appendChild(showTask);
                 showList.appendChild(deleteBtn);
-                ul.appendChild(showList);
-    
-                document.body.appendChild(ul);
+                ul.append(showList);
                 localStorage.setItem('list', JSON.stringify(savedList));
             }
         } catch (error) {
@@ -81,12 +83,11 @@ function deleteTask(element) {
 
 function inactiveOnClick(element) {
     const child = element.target.parentElement.children[0];
-    const index = parseInt(child.innerText);
-    console.log(index);
     const savedList = JSON.parse(localStorage.getItem('list'));
-    savedList.isInactive[index - 1] = !savedList.isInactive[index - 1];
+    const index = savedList['taskId'].indexOf(element.target.id);
+    savedList.isInactive[index] = !savedList.isInactive[index];
     localStorage.setItem('list', JSON.stringify(savedList));
-    if (savedList.isInactive[index - 1]) {
+    if (savedList.isInactive[index]) {
         child.style.textDecoration = 'line-through red 3px';
     } else {
         child.style.textDecoration = 'none';

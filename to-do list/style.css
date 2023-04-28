@@ -28,7 +28,6 @@ input {
 #delete {
     width: 1.8rem;
     height: 1.8rem;
-    margin-left: 6px;
     border: none;
     display: flex;
     justify-content: center;
@@ -45,12 +44,11 @@ input {
     background-image: url('images/trash-white.svg');
 }
 
-#List {
+.list {
     display: flex;
     flex-direction: column;
     row-gap: 10px;
     position: relative;
-    margin-left: 10px;
     top: 30px;
 }
 
@@ -64,4 +62,20 @@ li {
 h1 {
     position: relative;
     font-family: Arial, Helvetica, sans-serif;
+}
+
+.wrap {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    margin-top: 10px;
+}
+
+li {
+    display: flex;
+}
+
+li > button {
+    margin-left: auto;
 }
