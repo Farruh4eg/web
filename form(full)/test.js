@@ -19,7 +19,21 @@ function save(element) {
     }
     savedBlog = JSON.parse(localStorage.getItem('blog'));
     for (let i = 0; i < Object.keys(element).length - 1; i++) {
+        let rebornBlog = {
+            title: [],
+            date: [],
+            author: [],
+            desc: [],
+        }
         savedBlog[element[i].name].push(element[i].value);
+        rebornBlog['title'].push(element['title'].value);
+        rebornBlog['date'].push(element['date'].value);
+        rebornBlog['author'].push(element['author'].value);
+        rebornBlog['desc'].push(element['desc'].value);
+        console.log(rebornBlog);
+        if(i === 0) {
+            show(rebornBlog);
+        }
     }
     localStorage.setItem('blog', JSON.stringify(savedBlog));
 }
