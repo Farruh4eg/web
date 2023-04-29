@@ -1,0 +1,10 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: inherit
+}
+
+#map {
+    width: 100%;
+    height: 400px;
+}
