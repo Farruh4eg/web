@@ -37,7 +37,7 @@ function prepareSecond(data) {
 const container = document.getElementById('wrapper');
 
 function show(data) {
-    console.log(data);
+    container.innerHTML = '';
     if(typeof data == 'string') {
         data = JSON.parse(data);
     }
@@ -60,12 +60,10 @@ function show(data) {
 }
 
 const interval = setInterval(() => {
-    container.innerHTML = '';
     fetchFunc();
 }, 60000);
 
 document.getElementById('refresh').addEventListener('click', () => {
     fetchFunc();
     clearInterval(interval);
-    container.innerHTML = "";
 });
