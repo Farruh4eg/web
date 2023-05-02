@@ -77,3 +77,10 @@ a {
     row-gap: 10px;
 }
 
+.top {
+    color: gray;
+}
+
+.text > p {
+    margin: 8px 0;
+}
