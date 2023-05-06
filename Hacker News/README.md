@@ -1,1 +1,1 @@
-Hacker News no backend + vanilla JS only challenge
+Hacker News vanilla JS
