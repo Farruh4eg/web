@@ -1,11 +1,13 @@
 * {
     padding: 0;
     margin: 0;
+    box-sizing: inherit;
 }
 
 body {
     width: 100%;
     color: black;
+    overflow-x: hidden;
 }
 
 .wrapper {
@@ -44,7 +46,9 @@ a {
 }
 
 #nav {
-    display: flex;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(10, 1fr);
     font-weight: bold;
     font-family: Verdana, Geneva, sans-serif;
     font-size: 14px;
@@ -59,16 +63,21 @@ a {
 #refresh {
     display: flex;
     cursor: pointer;
-    text-align: center;
-    margin: 0 10px 0 auto;
+    justify-content: center;
+    align-items: center;
+    grid-column: 10;
 }
 
 #back {
-    margin-left: 10px;
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    grid-column: 9;
 }
 
 .hn {
-    margin-left: 10px;
+    margin-left: 4px;
 }
 
 #commentAll {
@@ -81,6 +90,33 @@ a {
     color: gray;
 }
 
+.text {
+    margin-left: 1px;
+}
+
 .text > p {
     margin: 8px 0;
+}
+
+.commentAll {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.commentAll > div {
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.children {
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.brackets {
+    color: gray;
+}
+
+.toggleVisibility:hover {
+    text-decoration: underline;
 }
